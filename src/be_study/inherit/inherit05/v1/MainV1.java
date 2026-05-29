@@ -1,4 +1,4 @@
-package be_study.inherit.inheri05.v1;
+package be_study.inherit.inherit05.v1;
 
 import java.util.ArrayList;
 import java.util.List;

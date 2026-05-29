@@ -1,4 +1,4 @@
-package be_study.inherit.inheri05.v4;
+package be_study.inherit.inherit05.v4;
 
 public class WindowCleaner extends Cleaner {
 	

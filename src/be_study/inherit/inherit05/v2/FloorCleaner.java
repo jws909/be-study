@@ -1,4 +1,4 @@
-package be_study.inherit.inheri05.v2;
+package be_study.inherit.inherit05.v2;
 
 public class FloorCleaner extends Cleaner {
 	
