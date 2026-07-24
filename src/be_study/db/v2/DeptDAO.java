@@ -139,4 +139,115 @@ public class DeptDAO {
 
 		return deptList;
 	}
+	
+	
+	// SELECT -> 쿼리실행 -> DB 테이블 정보 조회 -> ResultSet -> 객체/리스트단위 변수 변환
+	
+	// INSERT UPDATE DELETE -> 실행 -> return 결과 : 적용된 행의 갯수
+	
+	
+	// 저장 INSERT
+	
+	public int saveDept(int deptno, String dname, String loc) {
+		//db 연결, 실행 객체
+		Connection conn = null; //db 연결
+		PreparedStatement psmt = null; //db 연결해서 sql 명령 실행해주는 객체
+				
+		conn = DBConnectionManager.connectDB(); //DB 연결 후 연결된 객체 return
+		
+		String sqlQuery = " INSERT INTO DEPT (DEPTNO, DNAME, LOC) "
+						+ " VALUES ( ?, ?, ? ) ";
+		
+		int result = 0;
+		
+		try {
+			psmt = conn.prepareStatement(sqlQuery);
+			
+			psmt.setInt(1, deptno);
+			psmt.setString(2, dname);
+			psmt.setString(3, loc);
+			
+			// INSERT UPDATE DELETE -> 적용된 행 갯수
+			// executeUpdate();
+			
+			result = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.disconnectDB(conn, psmt, null);
+		}
+		
+		return result;
+	}
+	
+	public int saveDept(Dept dept) {
+		//db 연결, 실행 객체
+		Connection conn = null; //db 연결
+		PreparedStatement psmt = null; //db 연결해서 sql 명령 실행해주는 객체
+				
+		conn = DBConnectionManager.connectDB(); //DB 연결 후 연결된 객체 return
+		
+		String sqlQuery = " INSERT INTO DEPT (DEPTNO, DNAME, LOC) "
+						+ " VALUES ( ?, ?, ? ) ";
+		
+		int result = 0;
+		
+		try {
+			psmt = conn.prepareStatement(sqlQuery);
+			
+			psmt.setInt(1, dept.getDeptno());
+			psmt.setString(2, dept.getDname());
+			psmt.setString(3, dept.getLoc());
+			
+			// INSERT UPDATE DELETE -> 적용된 행 갯수
+			// executeUpdate();
+			
+			result = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.disconnectDB(conn, psmt, null);
+		}
+		
+		return result;
+	}
+	
+	
+	// 삭제 DELETE
+	
+	public int removeDept(int deptno) { //PK 컬럼 deptno 값 기준으로 삭제
+		//db 연결, 실행 객체
+		Connection conn = null; //db 연결
+		PreparedStatement psmt = null; //db 연결해서 sql 명령 실행해주는 객체
+				
+		conn = DBConnectionManager.connectDB(); //DB 연결 후 연결된 객체 return
+		
+		String sqlQuery = " DELETE FROM DEPT WHERE DEPTNO = ? ";
+		
+		int result = 0;
+		
+		try {
+			psmt = conn.prepareStatement(sqlQuery);
+			
+			psmt.setInt(1, deptno);
+			
+			// INSERT UPDATE DELETE -> 적용된 행 갯수
+			// executeUpdate();
+			
+			result = psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionManager.disconnectDB(conn, psmt, null);
+		}
+		
+		return result;
+	}
+	
+	public int removeDept(Dept dept) { 
+		return this.removeDept(dept.getDeptno());
+	}
 }
